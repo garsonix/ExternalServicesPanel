@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Garsonix.ExternalServicesPanel.PanelApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Garsonix.ExternalServicesPanel.PanelApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

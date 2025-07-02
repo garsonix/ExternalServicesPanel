@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Garsonix.ExternalServicesPanel.PanelApp.XamlViews.MainWindow.ServicePane"
+    x:Name="ServicePaneRoot"
+    Height="80"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Garsonix.ExternalServicesPanel.PanelApp.XamlViews.MainWindow"
+    xmlns:viewmodels="using:Garsonix.ExternalServicesPanel.PanelApp.ViewModels.MainWindow"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=viewmodels:ServiceViewModel}"
+    mc:Ignorable="d"
+    d:DesignWidth="525">
+
+    <Border Background="Gray">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+            <TextBlock FontSize="20" Padding="20,0" VerticalAlignment="Center" Text="{Binding ElementName=ServicePaneRoot, Path=ServiceName, Mode=OneWay}" />
+            <ToggleSwitch x:Name="ServiceButton"
+                    IsOn="{Binding ElementName=ServicePaneRoot, Path=Running, Mode=TwoWay}"
+                    IsEnabled="{Binding ReadyToChange, Mode=OneWay}"
+                    Grid.Column="1"  />
+            <!--        Toggled="{Binding ChangeServiceStatusCommand}"
+             <Style="{StaticResource {ComponentResourceKey TypeInTargetAssembly=wpfSpark:ToggleSwitch, ResourceId=ToggleSwitch.UWP.Dark.Style}}"/>-->
+            <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Text="{Binding Running, Converter={StaticResource ConverterBooleanToRunningStopped}, Mode=OneWay}"
+                    Visibility="{Binding ReadyToChange, Mode=OneWay, Converter={StaticResource ConverterBooleanToVisibility} }" />
+            <ProgressRing Grid.Column="2" HorizontalAlignment="Center"
+                    Width="40"
+                    Height="40"
+                    IsIndeterminate="True"
+                    Visibility="{Binding ReadyToChange, Mode=OneWay, Converter={StaticResource ConverterBooleanToInverseVisibility} }"/>
+        </Grid>
+    </Border>
+</UserControl>
