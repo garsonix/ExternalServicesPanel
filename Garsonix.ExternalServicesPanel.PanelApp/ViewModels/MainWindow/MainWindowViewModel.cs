@@ -1,5 +1,6 @@
 ﻿using Garsonix.ExternalServicesPanel.ExternalServices;
 using Garsonix.ExternalServicesPanel.ExternalServices.FakeService;
+using Garsonix.ExternalServicesPanel.ExternalServices.WindowsServices;
 using Garsonix.ExternalServicesPanel.PanelApp.Services.UI;
 using Garsonix.ExternalServicesPanel.PanelApp.ViewModels.Events;
 using Garsonix.ExternalServicesPanel.PanelApp.ViewModels.SelectServicesWindow;
@@ -19,7 +20,7 @@ public class MainWindowViewModel : ObservableViewModelBase
 
     public MainWindowViewModel()
     {
-        ServicesService = new FakeServicesService();
+        ServicesService = new WindowsServicesService();
         _windowService = new WindowService();
     }
 

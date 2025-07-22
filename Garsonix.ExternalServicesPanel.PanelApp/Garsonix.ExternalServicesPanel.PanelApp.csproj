@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Garsonix.ExternalServicesPanel.ExternalServices.FakeService\Garsonix.ExternalServicesPanel.ExternalServices.FakeService.csproj" />
+    <ProjectReference Include="..\Garsonix.ExternalServicesPanel.ExternalServices.WindowsServices\Garsonix.ExternalServicesPanel.ExternalServices.WindowsServices.csproj" />
     <ProjectReference Include="..\Garsonix.ExternalServicesPanel.ExternalServices\Garsonix.ExternalServicesPanel.ExternalServices.csproj" />
   </ItemGroup>
   <ItemGroup>

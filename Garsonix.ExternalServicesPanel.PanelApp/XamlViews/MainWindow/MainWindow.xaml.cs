@@ -1,4 +1,6 @@
+using Garsonix.ExternalServicesPanel.ExternalServices;
 using Garsonix.ExternalServicesPanel.ExternalServices.FakeService;
+using Garsonix.ExternalServicesPanel.ExternalServices.WindowsServices;
 using Garsonix.ExternalServicesPanel.PanelApp.Services;
 using Garsonix.ExternalServicesPanel.PanelApp.Services.DataServices;
 using Garsonix.ExternalServicesPanel.PanelApp.ViewModels.MainWindow;
@@ -7,6 +9,7 @@ using Microsoft.UI.Xaml;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-projet-info.
@@ -23,6 +26,7 @@ public partial class MainWindow : Window
 
     private readonly MainWindowViewModel _viewModel;
     private readonly ISimpleDataService _data = new RoamingDataService();
+    private readonly IExternalServicesService _servicesService = new WindowsServicesService();
 
     public MainWindow()
     {
@@ -36,9 +40,15 @@ public partial class MainWindow : Window
         {
             var savedServices = _data.GetValue<string>(ServicesKey);
             var servicesList = savedServices?.Split(';', StringSplitOptions.RemoveEmptyEntries) ?? [];
-            foreach (var service in servicesList)
+            foreach (var serviceName in servicesList)
             {
-                _viewModel.Services.Add(new ServiceViewModel(new FakeServiceMonitor(service)));
+                var monitor = _servicesService.Services.FirstOrDefault(s => s.DisplayName == serviceName);
+                if (monitor == null)
+                {
+                    continue;
+                }
+                //var monitor = new FakeServiceMonitor(service);
+                _viewModel.Services.Add(new ServiceViewModel(monitor));
             }
         }
         catch (Exception e)
