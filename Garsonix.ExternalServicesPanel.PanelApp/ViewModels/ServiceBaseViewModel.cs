@@ -26,7 +26,7 @@ public abstract class ServiceBaseViewModel(IExternalServiceMonitor serviceMonito
             RaisePropertyChanged(nameof(Name));
         }
     }
-    private string _name = "Unknown";
+    protected string _name = "Unknown";
 
     public bool ReadyToChange
     {
@@ -59,7 +59,7 @@ public abstract class ServiceBaseViewModel(IExternalServiceMonitor serviceMonito
             RaisePropertyChanged(nameof(Running));
         }
     }
-    private bool _running;
+    protected bool _running;
 
     private async Task ChangeServiceStatus(bool targetRunningStatus)
     {
@@ -78,7 +78,7 @@ public abstract class ServiceBaseViewModel(IExternalServiceMonitor serviceMonito
         catch (Exception ex)
         {
             ReadyToChange = true;
-            throw new Exception("Could not do that", ex);
+            throw new ExternalServicesException($"Failed to update status of service {Name}", ex);
             // UserMessages.Text = ex.InnerException.Message;
         }
         ReadyToChange = true;

@@ -13,7 +13,7 @@ namespace Garsonix.ExternalServicesPanel.PanelApp.ViewModels.SelectServicesWindo
 public class SelectServicesViewModel(IExternalServicesService servicesService, IEnumerable<string> selectedServices)
     : ObservableViewModelBase, IClosable
 {
-    private IList<ServiceViewModel> _allServiceViewModels;
+    private IList<ServiceViewModel>? _allServiceViewModels;
     private readonly IExternalServicesService _servicesService = servicesService;
     private readonly IEnumerable<string> _selectedServices = selectedServices;
 
@@ -85,7 +85,7 @@ public class SelectServicesViewModel(IExternalServicesService servicesService, I
             ? ((s) => true)
             : ((s) => s.Contains(searchText, StringComparison.CurrentCultureIgnoreCase));
 
-        var services = _allServiceViewModels.Where(s => isVisible(s.Name));
+        var services = _allServiceViewModels?.Where(s => isVisible(s.Name)) ?? [];
 
         Services.Clear();
         foreach (var service in services)

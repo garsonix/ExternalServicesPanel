@@ -1,4 +1,6 @@
-﻿using Garsonix.ExternalServicesPanel.PanelApp.XamlViews.MainWindow;
+﻿using Garsonix.ExternalServicesPanel.ExternalServices;
+using Garsonix.ExternalServicesPanel.ExternalServices.WindowsServices;
+using Garsonix.ExternalServicesPanel.PanelApp.XamlViews.MainWindow;
 using Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -11,6 +13,8 @@ namespace Garsonix.ExternalServicesPanel.PanelApp;
 /// </summary>
 public partial class App : Application
 {
+    public static App? Me { get; } = Current as App;
+    public IExternalServicesService ServicesService { get; } = new WindowsServicesService();
     private Window? _window;
 
     /// <summary>

@@ -26,7 +26,7 @@ public partial class MainWindow : Window
 
     private readonly MainWindowViewModel _viewModel;
     private readonly ISimpleDataService _data = new RoamingDataService();
-    private readonly IExternalServicesService _servicesService = new WindowsServicesService();
+    private readonly IExternalServicesService _servicesService = App.Me?.ServicesService ?? throw new Exception("Could not load services");
 
     public MainWindow()
     {

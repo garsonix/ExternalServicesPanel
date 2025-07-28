@@ -6,6 +6,7 @@ using Garsonix.ExternalServicesPanel.PanelApp.ViewModels.Events;
 using Garsonix.ExternalServicesPanel.PanelApp.ViewModels.SelectServicesWindow;
 using Garsonix.ExternalServicesPanel.PanelApp.XamlViews.AboutWindow;
 using Microsoft.UI.Xaml;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -20,7 +21,7 @@ public class MainWindowViewModel : ObservableViewModelBase
 
     public MainWindowViewModel()
     {
-        ServicesService = new WindowsServicesService();
+        ServicesService = App.Me?.ServicesService ?? throw new Exception("Failed to load Services");
         _windowService = new WindowService();
     }
 
